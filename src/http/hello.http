@@ -1,1 +1,18 @@
-GET http://localhost:3000
+
+
+// GET http://localhost:3000/api/wilders
+
+DELETE http://localhost:3000/api/wilder/24
+
+// POST http://localhost:3000/api/wilder
+//Content-Type: application/json
+
+//{
+  // "name" : "Second Next Dead Man"
+//}
+ //PUT http://localhost:3000/api/wilder/27
+ //Content-Type: application/json
+
+ //{
+  //  "name" : "Elea Camor"
+ //}
