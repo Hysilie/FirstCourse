@@ -6,10 +6,18 @@ module.exports = {
   // Create Wilder
   create: async (req, res) => {
     try {
-      await dataSource.getRepository(Wilder).save(req.body);
-      res.send("Created Wilder");
+      const existingEmail = await dataSource
+        .getRepository(Wilder)
+        .find({ where: { email: `${req.body.email}` } });
+      if (existingEmail.length > 0) {
+        console.log(existingEmail);
+        return res.send("Email is already used");
+      } else {
+        await dataSource.getRepository(Wilder).save(req.body);
+        res.send("Created Wilder");
+      }
     } catch (error) {
-      res.send("Error while creating the wilder");
+      res.send("Error while creating the wilder ");
     }
   },
 
@@ -26,11 +34,12 @@ module.exports = {
   },
 
   // Get All Wilders
-  findAll: async (req, res) => {
+  read: async (req, res) => {
     try {
-      dataSource.getRepository(Wilder).find();
-      res.send(rows);
+      const getAll = await dataSource.getRepository(Wilder).find();
+      res.send(getAll);
     } catch (error) {
+      console.log(error);
       res.send("Cannot find wilders");
     }
   },
@@ -49,8 +58,6 @@ module.exports = {
       const wilderToUpdate = await dataSource
         .getRepository(Wilder)
         .findOneBy({ name: req.body.wilderName });
-      console.log(wilderToUpdate);
-
       const skillToAdd = await dataSource
         .getRepository(Skill)
         .findOneBy({ name: req.body.skillName });

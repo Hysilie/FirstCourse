@@ -3,6 +3,8 @@ const dataSource = require("./utils").dataSource;
 const wilderController = require("./controller/wilder");
 const skillController = require("./controller/skill");
 
+const { makeATeapot } = require("./middleware/teapot");
+
 const app = express();
 
 app.use(express.json());
@@ -12,13 +14,13 @@ app.get("/", (req, res) => {
 });
 
 // Wilders
-app.get("/api/wilders", wilderController.findAll);
+app.get("/api/wilders", makeATeapot, wilderController.read);
 app.post("/api/wilder", wilderController.create);
 app.delete("/api/wilder/:id", wilderController.delete);
 app.put("/api/wilder/:id", wilderController.update);
 
 // Skills
-app.get("/api/skills", skillController.findAll);
+app.get("/api/skills", skillController.read);
 app.post("/api/skill", skillController.create);
 app.delete("/api/skill/:id", skillController.delete);
 app.put("/api/skill/:id", skillController.update);

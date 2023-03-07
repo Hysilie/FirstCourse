@@ -2,22 +2,23 @@
 GET http://localhost:3000/api/wilders
 
 ### DELETE BY ID
-DELETE http://localhost:3000/api/wilder/26
+DELETE http://localhost:3000/api/wilder/28
 
 ### CREATE WILDER
 POST http://localhost:3000/api/wilder
  Content-Type: application/json
 
 {
-    "name" : "John Doe"
+    "name" : "Bojack Horseman",
+    "email" : "bojack@gmail.com"
 }
  
 ### UPDATE WILDER
-PUT http://localhost:3000/api/wilder/29
+PUT http://localhost:3000/api/wilder/1
  Content-Type: application/json
 
 {
-     "name" : "Jane Austen"
+    // "email" : "john@gmail.com"
 }
 
 
@@ -25,14 +26,14 @@ PUT http://localhost:3000/api/wilder/29
 GET http://localhost:3000/api/skills
 
 ### DELETE BY ID
-DELETE http://localhost:3000/api/skill/24
+DELETE http://localhost:3000/api/skill/2
 
 ### CREATE SKILL
 POST http://localhost:3000/api/skill
  Content-Type: application/json
 
 {
-    "name" : "React"
+    "name" : "Node"
 }
  
 ### UPDATE SKILL
@@ -42,3 +43,12 @@ PUT http://localhost:3000/api/skill/27
  { 
     "name" : "html"
  }
+
+### ADD SKILL TO WILDER
+POST http://localhost:3000/api/addSkill
+ Content-Type: application/json
+
+{
+    "wilderName": "Bojack Horseman",
+    "skillName": "HTML"
+}

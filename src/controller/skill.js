@@ -25,10 +25,10 @@ module.exports = {
   },
 
   // Get All Skill
-  findAll: async (req, res) => {
+  read: async (req, res) => {
     try {
-      dataSource.getRepository(Skill).find();
-      res.send(rows);
+      const getAll = await dataSource.getRepository(Skill).find();
+      res.send(getAll);
     } catch (error) {
       res.send("Cannot find skills");
     }
