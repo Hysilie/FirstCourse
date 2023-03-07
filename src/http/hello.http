@@ -1,18 +1,44 @@
+### GET ALL
+GET http://localhost:3000/api/wilders
+
+### DELETE BY ID
+DELETE http://localhost:3000/api/wilder/26
+
+### CREATE WILDER
+POST http://localhost:3000/api/wilder
+ Content-Type: application/json
+
+{
+    "name" : "John Doe"
+}
+ 
+### UPDATE WILDER
+PUT http://localhost:3000/api/wilder/29
+ Content-Type: application/json
+
+{
+     "name" : "Jane Austen"
+}
 
 
-// GET http://localhost:3000/api/wilders
+### GET ALL
+GET http://localhost:3000/api/skills
 
-DELETE http://localhost:3000/api/wilder/24
+### DELETE BY ID
+DELETE http://localhost:3000/api/skill/24
 
-// POST http://localhost:3000/api/wilder
-//Content-Type: application/json
+### CREATE SKILL
+POST http://localhost:3000/api/skill
+ Content-Type: application/json
 
-//{
-  // "name" : "Second Next Dead Man"
-//}
- //PUT http://localhost:3000/api/wilder/27
- //Content-Type: application/json
+{
+    "name" : "React"
+}
+ 
+### UPDATE SKILL
+PUT http://localhost:3000/api/skill/27
+ Content-Type: application/json
 
- //{
-  //  "name" : "Elea Camor"
- //}
+ { 
+    "name" : "html"
+ }
