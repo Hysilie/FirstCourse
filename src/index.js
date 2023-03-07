@@ -27,8 +27,8 @@ app.put("/api/skill/:id", skillController.update);
 app.post("/api/addSkill", wilderController.addSkill);
 
 // 404
-app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!");
+app.get("*", function (req, res) {
+  res.send("OMG FAIL ! ", 404);
 });
 
 const start = async () => {
