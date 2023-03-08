@@ -1,29 +1,30 @@
 const { dataSource } = require("../utils");
 
-// Try to make class but failed
+// Try to make class
 
 class abstractController {
-  constructor({ table }) {
-    this.table = table;
+  constructor({ entity }) {
+    this.table = entity;
   }
 
   async create(req, res) {
     try {
       await dataSource.getRepository(this.table).save(req.body);
-      res.send("Created Skill");
+      res.send(`created ${this.table}`);
     } catch (error) {
       res.send("Error while creating the skill");
     }
   }
 
   async delete(req, res) {
+    const { id } = req.params;
     try {
-      await dataSource.getRepository(this.table).delete(req.params);
+      await dataSource.getRepository(this.table).delete(id);
       {
         res.send(` ${this.table} is deleted`);
       }
     } catch (error) {
-      res.send(`${this.table} Skill doesn't exist`);
+      res.send(`${this.table} doesn't exist`);
     }
   }
 
@@ -32,11 +33,20 @@ class abstractController {
       const getAll = await dataSource.getRepository(this.table).find();
       res.send(getAll);
     } catch (error) {
-      res.send(`Cannot find ${this.table}`);
+      res.send(`Cannot find`);
     }
   }
 
   async update(req, res) {
+    const { id } = req.params;
+
+    const existingUser = await dataSource
+      .getRepository(this.table)
+      .findOnyeBy({ id });
+
+    if (existingUser === null) {
+      return res.status(404).send(`${this.table} not found`);
+    }
     try {
       await dataSource.getRepository(this.table).update(req.params, req.body);
       res.send(`${this.table} is updated`);

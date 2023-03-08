@@ -1,41 +1,46 @@
 const express = require("express");
+const cors = require("cors");
 const dataSource = require("./utils").dataSource;
-const wilderController = require("./controller/wilder");
-const skillController = require("./controller/skill");
-
+const WilderController = require("./controller/WilderController");
+const SkillController = require("./controller/SkillController");
+const GradeController = require("./controller/GradeController");
 const { makeATeapot } = require("./middleware/teapot");
 
 const app = express();
-
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:3000" }));
+app.use(makeATeapot);
 
 app.get("/", (req, res) => {
-  res.send("Hello :)");
+  res.send("Hello World");
 });
 
-// Wilders
-app.get("/api/wilders", makeATeapot, wilderController.read);
-app.post("/api/wilder", wilderController.create);
-app.delete("/api/wilder/:id", wilderController.delete);
-app.put("/api/wilder/:id", wilderController.update);
+app.post("/api/wilder", WilderController.create);
+app.get("/api/wilder", WilderController.read);
+app.delete("/api/wilder/:id", WilderController.delete);
+app.put("/api/wilder/:id", WilderController.update);
+app.post(
+  "/api/wilder/:wilderId/skills/:skillId/add",
+  WilderController.addSkill
+);
 
-// Skills
-app.get("/api/skills", skillController.read);
-app.post("/api/skill", skillController.create);
-app.delete("/api/skill/:id", skillController.delete);
-app.put("/api/skill/:id", skillController.update);
+app.post("/api/skill", SkillController.create);
+app.get("/api/skill", SkillController.read);
+app.put("/api/skill/:id", SkillController.update);
+app.delete("/api/skill/:id", SkillController.delete);
 
-// RELATIONS
-app.post("/api/addSkill", wilderController.addSkill);
+app.post("/api/wilder/:wilderId/skill/:skillId/grade", GradeController.create);
+app.get("/api/wilder/:wilderId/grade", GradeController.read);
+app.put("/api/grade/:gradeId", GradeController.update);
+app.delete("/api/grade/:gradeId", GradeController.delete);
 
-// 404
-app.get("*", function (req, res) {
-  res.send("OMG FAIL ! ", 404);
+app.use((req, res, next) => {
+  res.status(404).send("Sorry can't find that!");
 });
 
 const start = async () => {
   await dataSource.initialize();
-  app.listen(3000, () => console.log("Server started on 3000"));
+  app.listen(5000, () => console.log("Server started on 5000"));
 };
 
 start();

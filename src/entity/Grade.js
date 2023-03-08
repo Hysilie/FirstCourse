@@ -8,8 +8,22 @@ module.exports = new EntitySchema({
       type: "int",
       generated: true,
     },
-    note: {
+    grade: {
       type: "int",
+    },
+  },
+  relations: {
+    wilder: {
+      target: "Wilder",
+      type: "many-to-one",
+      joinColumn: true,
+      onDelete: "CASCADE",
+    },
+    skill: {
+      target: "Skill",
+      type: "many-to-one",
+      joinColumn: true,
+      onDelete: "CASCADE",
     },
   },
 });
