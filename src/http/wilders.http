@@ -1,0 +1,30 @@
+POST http://localhost:5000/api/wilder
+Content-Type: application/json
+
+{
+    "name" : "Yuri Lapuis",
+   "email" : "yuri@gmail.com",
+   "city": "Rouen"
+}
+
+###
+GET http://localhost:5000/api/wilder
+
+###
+DELETE http://localhost:5000/api/wilder
+Content-Type: application/json
+
+{
+    "id": 1
+}
+
+###
+PUT http://localhost:5000/api/wilder/1
+Content-Type: application/json
+
+{
+   "city": "Rouen"
+}
+
+###
+POST http://localhost:5000/api/wilder/1/skill/1

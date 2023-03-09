@@ -15,6 +15,9 @@ module.exports = new EntitySchema({
       type: "text",
       unique: true,
     },
+    city: {
+      type: "text",
+    },
   },
   relations: {
     skills: {

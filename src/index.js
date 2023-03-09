@@ -9,7 +9,7 @@ const { makeATeapot } = require("./middleware/teapot");
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000" }));
-app.use(makeATeapot);
+//app.use(makeATeapot);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
